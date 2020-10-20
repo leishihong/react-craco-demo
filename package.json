@@ -30,6 +30,8 @@
     "webpack-bundle-analyzer": "^3.9.0"
   },
   "scripts": {
+    "start:snowpack": "snowpack dev",
+    "build:snowpack": "snowpack build",
     "start": "craco start FAST_REFRESH=true",
     "build": "set GENERATE_SOURCEMAP=false && craco build",
     "test": "craco test"
@@ -62,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@snowpack/app-scripts-react": "^1.12.4",
     "snowpack": "^2.15.0"
   }
 }
