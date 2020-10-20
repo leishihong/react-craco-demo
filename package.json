@@ -3,21 +3,44 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.12.1",
+    "@craco/craco": "^5.7.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.7.2",
+    "antd-dayjs-webpack-plugin": "^1.0.1",
+    "babel-plugin-import": "^1.13.1",
+    "craco-less": "^1.17.0",
+    "date-fns": "^2.16.1",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.2",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "terser-webpack-plugin": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "set PORT=5000 && craco start",
+    "build": "set GENERATE_SOURCEMAP=false && craco build",
+    "test": "craco test"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-add": "pretty-quick --staged",
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "lint-staged": {
+    "src/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "browserslist": {
     "production": [
