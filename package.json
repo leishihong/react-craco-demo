@@ -11,19 +11,26 @@
     "antd": "^4.7.2",
     "antd-dayjs-webpack-plugin": "^1.0.1",
     "babel-plugin-import": "^1.13.1",
+    "compression-webpack-plugin": "^6.0.3",
+    "craco-antd": "^1.19.0",
     "craco-less": "^1.17.0",
+    "craco-vtk": "^1.0.2",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.2",
     "prettier": "^2.1.2",
     "pretty-quick": "^3.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-hot-loader": "^4.13.0",
     "react-scripts": "3.4.3",
-    "terser-webpack-plugin": "^5.0.0"
+    "terser-webpack-plugin": "^5.0.0",
+    "webpack-bundle-analyzer": "^3.9.0"
   },
   "scripts": {
-    "start": "set PORT=5000 && craco start",
+    "start": "craco start FAST_REFRESH=true",
     "build": "set GENERATE_SOURCEMAP=false && craco build",
     "test": "craco test"
   },
@@ -53,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "snowpack": "^2.15.0"
   }
 }
