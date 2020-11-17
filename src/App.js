@@ -5,9 +5,10 @@ import './App.less'
 import { Button } from 'antd'
 
 function App() {
+  console.log(123)
   return (
     <div className="App">
-      <Button type="primary">12测1112试</Button>
+      <Button type="primary">12测12121112试</Button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
