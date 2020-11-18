@@ -28,6 +28,7 @@
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
     "react-scripts": "3.4.3",
+    "simple-progress-webpack-plugin": "^1.1.2",
     "terser-webpack-plugin": "^5.0.0",
     "webpack-bundle-analyzer": "^3.9.0",
     "webpack-dashboard": "^3.2.1",

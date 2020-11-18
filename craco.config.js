@@ -18,6 +18,7 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
 
 const path = require('path')
 const fs = require('fs')
@@ -118,11 +119,34 @@ module.exports = {
             test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
             threshold: 1024,
             minRatio: 0.8
-          })
+          }),
+          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+          // 查看打包的进度
+          new SimpleProgressWebpackPlugin()
         ],
         []
       )
     ],
+    //抽离公用模块
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            chunks: 'initial',
+            minChunks: 2,
+            maxInitialRequests: 5,
+            minSize: 0
+          },
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            priority: 10,
+            enforce: true
+          }
+        }
+      }
+    },
     /**
      * 重写 webpack 任意配置
      *  - configure 能够重写 webpack 相关的所有配置，但是，仍然推荐你优先阅读 craco 提供的快捷配置，把解决不了的配置放到 configure 里解决；
@@ -130,19 +154,20 @@ module.exports = {
      */
     configure: (webpackConfig, { env, paths }) => {
       // paths.appPath='public'
-      ;(paths.appBuild = 'dist'), // 配合输出打包修改文件目录
-        /**
-         * 修改 output
-         */
-        (webpackConfig.output = {
-          ...webpackConfig.output,
-          // ...{
-          //   filename: whenDev(() => 'static/js/bundle.js', 'static/js/[name].js'),
-          //   chunkFilename: 'static/js/[name].js'
-          // },
-          path: path.resolve(__dirname, 'dist'), // 修改输出文件目录
-          publicPath: '/'
-        })
+      paths.appBuild = 'dist' // 配合输出打包修改文件目录
+      /**
+       * 修改 output
+       */
+      // webpackConfig中可以解构出你想要的参数比如mode、devtool、entry等等，更多信息请查看webpackConfig.json文件
+      webpackConfig.output = {
+        ...webpackConfig.output,
+        // ...{
+        //   filename: whenDev(() => 'static/js/bundle.js', 'static/js/[name].js'),
+        //   chunkFilename: 'static/js/[name].js'
+        // },
+        path: path.resolve(__dirname, 'dist'), // 修改输出文件目录
+        publicPath: '/'
+      }
       /**
        * webpack split chunks
        */
