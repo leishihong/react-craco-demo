@@ -63,7 +63,11 @@ module.exports = {
       // 此处是一个示例，实际可根据各自需求配置
     },
     plugins: [
+      // webpack构建进度条
       new WebpackBar({ profile: true }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // 查看打包的进度
+      new SimpleProgressWebpackPlugin(),
       // 时间转换工具采取day替换moment
       new AntdDayjsWebpackPlugin(),
       // // 新增模块循环依赖检测插件
@@ -119,10 +123,7 @@ module.exports = {
             test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
             threshold: 1024,
             minRatio: 0.8
-          }),
-          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-          // 查看打包的进度
-          new SimpleProgressWebpackPlugin()
+          })
         ],
         []
       )
