@@ -254,7 +254,7 @@ module.exports = {
         pathRewrite: genPathRewriteFunc('/api', ['API_PATH_REWRITE']),
         router: () => getProxyConfig(['API_TARGET', 'TARGET'])
       },
-      '/saas': {
+      '/users': {
         target: 'https://placeholder.com/',
         changeOrigin: true,
         secure: false,
